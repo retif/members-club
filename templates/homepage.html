@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<style>
+    body {
+        margin: 30px;
+    }
+
+    .header, .title {
+        text-align: center;
+        font-weight: bold;
+    }
+
+    h3 {
+        font-weight: bold;
+        margin-bottom: 0;
+    }
+
+    form {
+        display: inline-flex;
+        flex-direction: column;
+    }
+
+    input {
+        margin-top: 10px;
+    }
+
+    form .buttons {
+        margin-left: 47px;
+    }
+
+    form .buttons input:last-child {
+        float: right;
+    }
+
+    .members {
+        display: grid;
+        grid-template-columns: 100px 1fr 1fr 1fr;
+        margin-left: 30px;
+        margin-right: 30px;
+        border-top: 1px solid black;
+        border-right: 1px solid black;
+    }
+
+    .members > div:nth-child(-n+4) {
+        font-weight: bold;
+    }
+
+    .members > div {
+        padding-left: 10px;
+        border-bottom: 1px solid black;
+        border-left: 1px solid black;
+    }
+</style>
+<html>
+<body>
+<h1 class="header">Welcome to the Club!</h1>
+
+<div>
+    <h3>New Member</h3>
+    <form action="/add-member" method="POST">
+        <label for="name">Name: <input id="name" name="name" type="text"/></label>
+        <label for="email">Email: <input id="email" name="email" type="email"></label>
+        <div class="buttons">
+            <input type="submit" value="Add"/>
+            <input type="reset" value="Clear"/>
+        </div>
+    </form>
+</div>
+
+<div clas="club">
+    <h3 class="title">Members</h3>
+    <div class="members">
+        <div>#</div>
+        <div>Name</div>
+        <div>Email</div>
+        <div>Registration date</div>
+
+        {{range $index, $element := .Members}}
+        <div>{{add $index 1}}</div>
+        <div>{{$element.Name}}</div>
+        <div>{{$element.Email}}</div>
+        <div>{{$element.RegistrationDate.Format "02.01.2006"}}</div>
+        {{end}}
+    </div>
+</div>
+</body>
+</html>
